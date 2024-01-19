@@ -9,14 +9,14 @@
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Name</th>
             <th>Description</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="ctg : ${categoryList}">
-            <td th:text="${ctg.id}"></td>
+            <!-- <td th:text="${ctg.id}"></td> -->
             <td th:text="${ctg.name}"></td>
             <td th:text="${ctg.description}"></td>
             <!-- th:href="@{/cocktails/list/{id}(id=${ctg.id})}" -->
