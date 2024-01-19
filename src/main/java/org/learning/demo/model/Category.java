@@ -1,6 +1,7 @@
 package org.learning.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
@@ -11,11 +12,13 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
+    @NotEmpty
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "category")
-    private List<Cocktail>cocktails;
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    private List<Cocktail> cocktails;
 
     // GETTER AND SETTER
     public String getName() {
