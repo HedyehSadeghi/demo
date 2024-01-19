@@ -17,7 +17,7 @@ public class Category {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    @OneToMany(mappedBy = "category")
     private List<Cocktail> cocktails;
 
     // GETTER AND SETTER
@@ -52,4 +52,6 @@ public class Category {
     public void setId(Integer id) {
         this.id = id;
     }
+
+
 }
