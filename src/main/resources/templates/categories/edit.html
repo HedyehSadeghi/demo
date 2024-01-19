@@ -9,7 +9,7 @@
             id="edit-category"
             method="post"
             th:object="${category}"
-            th:action="@{/categories/edit}"
+            th:action="@{/categories/edit/{id}(id=${category.id})}"
             class="row g-3"
     >
         <div class="col-4">
@@ -22,7 +22,7 @@
         </div>
         <div class="col-12 mt-4">
             <button type="submit" class="btn btn-primary me-4">Salva</button>
-            <a class="btn btn-danger" th:href="@{/categories}">Annulla</a>
+            <a class="btn btn-danger" th:href="@{/categories/list}">Annulla</a>
         </div>
     </form>
 
