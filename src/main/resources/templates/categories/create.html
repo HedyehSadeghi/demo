@@ -2,11 +2,31 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/resources :: head('Category create')"></head>
 <body>
-
 <div class="container">
-
-
+    <h1 class="text-center">Create Category</h1>
+    <form
+            id="create-category"
+            method="post"
+            th:object="${category}"
+            th:action="@{/categories/create}"
+            class="row g-3"
+    >
+        <div class="col-4">
+            <label for="name" class="form-label">Name</label>
+            <input class="form-control" type="text" id="name" th:field="*{name}">
+        </div>
+        <div class="col-8">
+            <label for="description" class="form-label">Description</label>
+            <input class="form-control" type="text" id="description" th:field="*{description}">
+        </div>
+        <div class="col-12 mt-4">
+            <button type="submit" class="btn btn-primary me-4">Salva</button>
+            <a class="btn btn-danger" th:href="@{/categories}">Annulla</a>
+        </div>
+    </form>
 </div>
+
+
 
 <th:block th:replace="fragments/resources :: script"></th:block>
 </body>
