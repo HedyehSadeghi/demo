@@ -35,10 +35,23 @@
     </style>
 </head>
 <body>
-
 <div class="glass-container">
-    <a th:href="@{/cocktails/list/{id}(id=${category.id})}" class="category-link">Categoria 1</a>
-    <a th:href="@{/cocktails/list/{id}(id=${category.id}}" class="category-link">Categoria 2</a>
+<table th:unless="${categoriesList.size() == 0}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ctg : ${categoryList}">
+        <td><a th:href="@{/cocktails/list/{id}(id=${ctg.id})}" th:text="${ctg.id}"></a></td>
+        <td><a th:href="@{/cocktails/list/{id}(id=${ctg.id})}" th:text="${ctg.name}"></a></td>
+        <td><a th:href="@{/cocktails/list/{id}(id=${ctg.id})}" th:text="${ctg.description}"></a></td>
+    </tr>
+    </tbody>
+</table>
 </div>
 
 <th:block th:replace="fragments/resources :: script"></th:block>
