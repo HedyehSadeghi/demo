@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +48,7 @@ public class CategoryController {
             return "categories/create";
         }
         Category savedCategory = categoryRepository.save(categoryForm);
-        return "redirect:/categories";
+        return "redirect:/categories/list";
     }
 
 
@@ -71,13 +72,26 @@ public class CategoryController {
                 return "categories/edit";
             } else {
                 Category categorySaved = categoryRepository.save(categoryForm);
-                return "redirect:/categories";
+                return "redirect:/categories/list";
             }
 
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "category with id " + id + "not found");
         }
 
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Category> result = categoryRepository.findById(id);
+        if (result.isPresent()) {
+            categoryRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("redirectMessage", "category" + result.get().getName() + " deleted");
+            return "redirect:/categories/list";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Categories with id " + id + "not found");
+        }
     }
 
 
