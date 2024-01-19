@@ -5,6 +5,7 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "cocktails")
@@ -23,7 +24,7 @@ public class Cocktail {
     private BigDecimal price;
 
     @ManyToOne
-    private List<Categories> categories;
+    private List<Category> categories;
 
     // GETTER & SETTER
 
@@ -67,11 +68,11 @@ public class Cocktail {
         this.price = price;
     }
 
-    public List<Categories> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Categories> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 }
