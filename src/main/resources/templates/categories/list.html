@@ -37,8 +37,8 @@
 <body>
 
 <div class="glass-container">
-    <a th:href="#" class="category-link">Categoria 1</a>
-    <a th:href="#" class="category-link">Categoria 2</a>
+    <a th:href="@{/cocktails/list/{id}(id=${category.id})}" class="category-link">Categoria 1</a>
+    <a th:href="@{/cocktails/list/{id}(id=${category.id}}" class="category-link">Categoria 2</a>
 </div>
 
 <th:block th:replace="fragments/resources :: script"></th:block>
