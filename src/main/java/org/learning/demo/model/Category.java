@@ -52,6 +52,4 @@ public class Category {
     public void setId(Integer id) {
         this.id = id;
     }
-
-
 }
