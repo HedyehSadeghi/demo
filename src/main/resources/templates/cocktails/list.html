@@ -18,11 +18,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr th:each="cocktail : ${cocktailList}">
+                <td th:text="${cocktail.name}"></td>
+                <td th:text="${cocktail.image}"></td>
+                <td th:text="${cocktail.description}"></td>
+                <td th:text="${cocktail.price}"></td>
             </tr>
             </tbody>
 
