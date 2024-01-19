@@ -68,4 +68,26 @@ public class CocktailController {
     }
 
 
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Cocktail> result = cocktailRepository.findById(id);
+        if (result.isPresent()) {
+            model.addAttribute("cocktail", result.get());
+            return "cocktails/edit";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cocktail with id " + id + " not found");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute Cocktail cocktailForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "cocktails/edit";
+        }
+        Cocktail updatedCocktail = cocktailRepository.save(cocktailForm);
+        return "redirect:/cocktails/list";
+
+    }
+
+
 }
