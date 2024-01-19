@@ -1,15 +1,20 @@
 package org.learning.demo.controller;
 
+import jakarta.validation.Valid;
+import org.learning.demo.model.Category;
 import org.learning.demo.model.Cocktail;
 import org.learning.demo.repository.CategoryRepository;
 import org.learning.demo.repository.CocktailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cocktails")
@@ -27,6 +32,38 @@ public class CocktailController {
         List<Cocktail> cocktailList = cocktailRepository.findAll();
         model.addAttribute("cocktailList", cocktailList);
         return "cocktails/list";
+
+    }
+
+
+    @GetMapping("/create")
+    public String create(@RequestParam(name = "categoryId", required = true) Integer categoryId, Model model) {
+        Optional<Category> result = categoryRepository.findById(categoryId);
+        if (result.isPresent()) {
+            Category category = result.get();
+            model.addAttribute("category", category);
+
+            Cocktail newCocktail = new Cocktail();
+            newCocktail.setCategory(category);
+            model.addAttribute("cocktail", newCocktail);
+            return "cocktails/create";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "category with id " + categoryId + " not found");
+        }
+
+    }
+
+
+    @PostMapping("/create")
+    public String store(@Valid @ModelAttribute("cocktail") Cocktail cocktailForm, BindingResult bindingResult, Model model) {
+        //valido oggetto
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("category", cocktailForm.getCategory());
+            return "cocktails/create";
+        }
+        Cocktail storedCocktail = cocktailRepository.save(cocktailForm);
+
+        return "redirect:/cocktails/list";
 
     }
 
