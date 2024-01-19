@@ -3,9 +3,9 @@ package org.learning.demo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "cocktails")
@@ -17,10 +17,13 @@ public class Cocktail {
     @NotEmpty
     @Column(nullable = false)
     private String name;
+    @Lob
     private String description;
+    @Lob
     private String image;
     @Column(nullable = false)
     @DecimalMin(value = "0.01")
+    @NotNull
     private BigDecimal price;
 
     @ManyToOne

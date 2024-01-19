@@ -2,56 +2,27 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/resources :: head('Category List')">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: linear-gradient(to bottom, #2e1a31, #0d0b1e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .glass-container {
-            background: #333;
-            border-radius: 10px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 100);
-        }
-
-        .category-link {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 20px;
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-        }
-
-        .category-link:hover {
-            color: #f39c12;
-        }
     </style>
 </head>
 <body>
-<div class="glass-container">
-<table th:unless="${categoriesList.size() == 0}">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="ctg : ${categoryList}">
-        <td><a th:href="@{/cocktails/list/{id}(id=${ctg.id})}" th:text="${ctg.id}"></a></td>
-        <td><a th:href="@{/cocktails/list/{id}(id=${ctg.id})}" th:text="${ctg.name}"></a></td>
-        <td><a th:href="@{/cocktails/list/{id}(id=${ctg.id})}" th:text="${ctg.description}"></a></td>
-    </tr>
-    </tbody>
-</table>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ctg : ${categoryList}">
+            <td th:text="${ctg.id}"></td>
+            <td th:text="${ctg.name}"></td>
+            <td th:text="${ctg.description}"></td>
+            <!-- th:href="@{/cocktails/list/{id}(id=${ctg.id})}" -->
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <th:block th:replace="fragments/resources :: script"></th:block>

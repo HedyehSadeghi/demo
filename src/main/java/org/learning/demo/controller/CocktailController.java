@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -86,6 +87,21 @@ public class CocktailController {
         }
         Cocktail updatedCocktail = cocktailRepository.save(cocktailForm);
         return "redirect:/cocktails/list";
+
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        Optional<Cocktail> result = cocktailRepository.findById(id);
+        if (result.isPresent()) {
+            Cocktail cocktailToDelete = result.get();
+            cocktailRepository.delete(cocktailToDelete);
+            redirectAttributes.addFlashAttribute("redirectMessage", "cocktail" + result.get().getName() + " deleted");
+            return "redirect:/cocktails/list";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cocktail with id " + id + " not found");
+        }
 
     }
 
