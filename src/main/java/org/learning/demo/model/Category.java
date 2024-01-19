@@ -2,6 +2,8 @@ package org.learning.demo.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -12,8 +14,8 @@ public class Category {
     private String name;
     private String description;
 
-    @OneToMany (mappedBy = "cocktails")
-    private Cocktail cocktail;
+    @OneToMany(mappedBy = "category")
+    private List<Cocktail>cocktails;
 
     // GETTER AND SETTER
     public String getName() {
@@ -32,11 +34,11 @@ public class Category {
         this.description = description;
     }
 
-    public Cocktail getCocktail() {
-        return cocktail;
+    public List<Cocktail> getCocktails() {
+        return cocktails;
     }
 
-    public void setCocktail(Cocktail cocktail) {
-        this.cocktail = cocktail;
+    public void setCocktails(List<Cocktail> cocktails) {
+        this.cocktails = cocktails;
     }
 }

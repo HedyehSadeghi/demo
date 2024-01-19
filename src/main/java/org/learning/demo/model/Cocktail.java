@@ -24,7 +24,7 @@ public class Cocktail {
     private BigDecimal price;
 
     @ManyToOne
-    private List<Category> categories;
+    private Category category;
 
     // GETTER & SETTER
 
@@ -68,11 +68,11 @@ public class Cocktail {
         this.price = price;
     }
 
-    public List<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
