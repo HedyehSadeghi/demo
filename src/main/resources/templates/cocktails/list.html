@@ -7,27 +7,18 @@
     <div>
         <h1> Ecco la lista dei Cocktail </h1>
     </div>
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Foto</th>
-                <th>Descrizione</th>
-                <th>Prezzo</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cocktail : ${cocktailList}">
-                <td th:text="${cocktail.name}"></td>
-                <td th:text="${cocktail.image}"></td>
-                <td th:text="${cocktail.description}"></td>
-                <td th:text="${cocktail.price}"></td>
-            </tr>
-            </tbody>
 
-        </table>
+    <div class="d-flex g-5">
+        <div th:each="cocktail : ${cocktailList}" class="card" style="width: 18rem;">
+            <img th:src="${cocktail.image}" class="card-img-top" alt="foto">
+            <div class="card-body">
+                <h5 th:text="${cocktail.name}" class="card-title"></h5>
+                <p th:text="${cocktail.description}" class="card-text"></p>
+                <p th:text="${cocktail.price}" class="card-text"></p>
+            </div>
+        </div>
     </div>
+
 
 </div>
 
