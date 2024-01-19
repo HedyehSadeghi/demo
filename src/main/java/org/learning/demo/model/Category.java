@@ -12,7 +12,7 @@ public class Category {
     private String name;
     private String description;
 
-    @OneToMany
+    @OneToMany (mappedBy = "cocktails")
     private Cocktail cocktail;
 
     // GETTER AND SETTER
