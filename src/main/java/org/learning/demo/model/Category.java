@@ -44,4 +44,12 @@ public class Category {
     public void setCocktails(List<Cocktail> cocktails) {
         this.cocktails = cocktails;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
