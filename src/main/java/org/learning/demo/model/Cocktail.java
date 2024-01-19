@@ -17,7 +17,9 @@ public class Cocktail {
     @NotEmpty
     @Column(nullable = false)
     private String name;
+    @Lob
     private String description;
+    @Lob
     private String image;
     @Column(nullable = false)
     @DecimalMin(value = "0.01")
