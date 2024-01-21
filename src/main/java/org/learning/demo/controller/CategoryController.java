@@ -2,6 +2,7 @@ package org.learning.demo.controller;
 
 import jakarta.validation.Valid;
 import org.learning.demo.model.Category;
+import org.learning.demo.model.Cocktail;
 import org.learning.demo.repository.CategoryRepository;
 import org.learning.demo.repository.CocktailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +31,29 @@ public class CategoryController {
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categoryList", categoryList);
         return "categories/list";
-
     }
 
+    @GetMapping("/show-cocktails/{categoryId}")
+    public String showCocktailsInCategory(@PathVariable Integer categoryId, Model model) {
+        Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+
+        if (optionalCategory.isPresent()) {
+            Category category = optionalCategory.get();
+            List<Cocktail> cocktails = category.getCocktails();
+            model.addAttribute("category", category);
+            model.addAttribute("cocktails", cocktails);
+            model.addAttribute("allCategories", categoryRepository.findAll());
+            return "categories/show";
+        } else {
+            return "redirect:/categories/list";
+        }
+    }
 
     @GetMapping("/create")
     public String create(Model model) {
         Category category = new Category();
         model.addAttribute("category", category);
         return "categories/create";
-
     }
 
     @PostMapping("/create")

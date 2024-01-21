@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show Cocktails</title>
+</head>
+<body>
+<div>
+    <h2 th:text="${category.name}"></h2>
+</div>
+<div>
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cocktail : ${cocktails}">
+            <td th:text="${cocktail.name}"></td>
+            <td th:text="${cocktail.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -27,6 +27,7 @@ public class Cocktail {
     private BigDecimal price;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     // GETTER & SETTER
